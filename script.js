@@ -22,26 +22,7 @@ const btnCancelarEdicao = document.getElementById("cancelar-edicao");
 const btnConfirmarExclusao = document.getElementById("confirmar-exclusao");
 const btnCancelarExclusao = document.getElementById("cancelar-exclusao");
 
-const clientes = [
-  {
-    nome: "Rodrigo",
-    sobrenome: "Medeiros",
-    cpf: "999999",
-    email: "rodrigo@mail.com",
-  },
-  {
-    nome: "Pedro",
-    sobrenome: "Lima",
-    cpf: "999999",
-    email: "pedro@mail.com",
-  },
-  {
-    nome: "Joao",
-    sobrenome: "Victor",
-    cpf: "999999",
-    email: "jv@mail.com",
-  },
-];
+const clientes = [];
 
 let indexEditando = null;
 let indexExcluindo = null;
