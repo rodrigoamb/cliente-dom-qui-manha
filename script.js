@@ -115,6 +115,45 @@ function abrirModalEditar(cliente, index) {
   inputEditEmail.value = cliente.email;
 }
 
+function fecharModalEditar() {
+  indexEditando = null;
+  modalEditar.style.display = "none";
+}
+
+function confirmarExclusao() {
+  clientes.splice(indexExcluindo, 1);
+  fecharModalExcluir();
+  renderizarTabela();
+}
+
+formEdicao.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  if (
+    !inputEditNome.value ||
+    !inputEditSobrenome.value ||
+    !inputEditCpf.value ||
+    !inputEditEmail.value
+  ) {
+    return;
+  }
+
+  clientes[indexEditando] = {
+    nome: inputEditNome.value,
+    sobrenome: inputEditSobrenome.value,
+    cpf: inputEditCpf.value,
+    email: inputEditEmail.value,
+  };
+
+  indexEditando = null;
+  fecharModalEditar();
+  renderizarTabela();
+});
+
 btnCancelarExclusao.addEventListener("click", fecharModalExcluir);
+
+btnCancelarEdicao.addEventListener("click", fecharModalEditar);
+
+btnConfirmarExclusao.addEventListener("click", confirmarExclusao);
 
 renderizarTabela();
