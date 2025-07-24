@@ -22,6 +22,8 @@ const btnCancelarEdicao = document.getElementById("cancelar-edicao");
 const btnConfirmarExclusao = document.getElementById("confirmar-exclusao");
 const btnCancelarExclusao = document.getElementById("cancelar-exclusao");
 
+const espacoMensagem = document.querySelector("#mensagem");
+
 const clientes = [];
 
 let indexEditando = null;
@@ -30,7 +32,7 @@ let indexExcluindo = null;
 function renderizarTabela() {
   tabela.innerHTML = "";
 
-  clientes.forEach((cliente) => {
+  clientes.forEach((cliente, index) => {
     const tr = document.createElement("tr");
 
     tr.innerHTML = `
@@ -46,10 +48,12 @@ function renderizarTabela() {
     const btnEditar = document.createElement("button");
     btnEditar.textContent = "Editar";
     btnEditar.classList.add("editar");
+    btnEditar.onclick = () => abrirModalEditar(cliente, index);
 
     const btnExcluir = document.createElement("button");
     btnExcluir.textContent = "Excluir";
     btnExcluir.classList.add("excluir");
+    btnExcluir.onclick = () => abrirModalExcluir(index);
 
     tdAcoes.appendChild(btnEditar);
     tdAcoes.appendChild(btnExcluir);
@@ -69,6 +73,7 @@ form.addEventListener("submit", (event) => {
   const email = inputEmail.value;
 
   if (!nome || !sobrenome || !cpf || !email) {
+    espacoMensagem.textContent = "Preencha todos os campos";
     return;
   }
 
@@ -84,5 +89,32 @@ form.addEventListener("submit", (event) => {
   form.reset();
   renderizarTabela();
 });
+
+function abrirModalExcluir(index) {
+  console.log("Clicou no index: ", index);
+  indexExcluindo = index;
+
+  modalExcluir.style.display = "flex";
+}
+
+function fecharModalExcluir() {
+  indexExcluindo = null;
+  modalExcluir.style.display = "none";
+}
+
+function abrirModalEditar(cliente, index) {
+  console.log(cliente);
+  console.log(index);
+
+  indexEditando = index;
+  modalEditar.style.display = "flex";
+
+  inputEditNome.value = cliente.nome;
+  inputEditSobrenome.value = cliente.sobrenome;
+  inputEditCpf.value = cliente.cpf;
+  inputEditEmail.value = cliente.email;
+}
+
+btnCancelarExclusao.addEventListener("click", fecharModalExcluir);
 
 renderizarTabela();

@@ -133,3 +133,13 @@ th {
 .modal-content form {
   flex-direction: column;
 }
+
+.container-mensagem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#mensagem {
+  color: red;
+}
